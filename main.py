@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
 origins = [
-    "https://testeos-chi.vercel.app/"
+    "https://testeos-chi.vercel.app"
 ]
 
 # Permitir peticiones desde cualquier origen (Vercel incluido)
