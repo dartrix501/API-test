@@ -1,8 +1,17 @@
-# main.py
 from fastapi import FastAPI
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+# Permitir peticiones desde cualquier origen (Vercel incluido)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class Contacto(BaseModel):
     nombre: str
@@ -10,5 +19,4 @@ class Contacto(BaseModel):
 
 @app.post("/procesar")
 def procesar(contacto: Contacto):
-    print(f"Nombre: {contacto.nombre}, Email: {contacto.email}")
-    return {"mensaje": f"Datos recibidos: {contacto.nombre}, {contacto.email}"}
+    return {"mensaje": f"Datos recibidos correctamente: {contacto.nombre}, {contacto.email}"}
