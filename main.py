@@ -4,9 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-origins = [
-    "https://testeos-chi.vercel.app"
-]
+origins = ["https://testeos-chi.vercel.app"]
 
 # Permitir peticiones desde cualquier origen (Vercel incluido)
 app.add_middleware(
@@ -20,6 +18,11 @@ app.add_middleware(
 class Contacto(BaseModel):
     nombre: str
     email: str
+
+
+@app.get("/")
+def root():
+    return {"mensaje": "API funcionando"}
 
 @app.post("/procesar")
 def procesar(contacto: Contacto):
