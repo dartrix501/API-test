@@ -26,7 +26,7 @@ def root():
 
 @app.post("/procesar")
 def procesar(contacto: Contacto):
-    mensaje = {"mensaje": f"Datos recibidos correctamente: {contacto.nombre}, {contacto.email}"}
+    mensaje = {f"Datos recibidos correctamente: {contacto.nombre}, {contacto.email}"}
     print(mensaje)
     return mensaje
 
