@@ -25,5 +25,4 @@ class Contacto(BaseModel):
 def procesar(contacto: Contacto):
     return {"mensaje": f"Datos recibidos correctamente: {contacto.nombre}, {contacto.email}"}
 
-if __name__ == "__main__":
-    print("Hello world")
+print("Hello world")
