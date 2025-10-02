@@ -65,3 +65,5 @@ def procesar(contacto: Contacto):
 def obtener_contactos():
     contactos = list(coleccion.find({}, {"_id": 0}))  # lista de documentos sin _id
     return contactos
+
+print("Hello word")
