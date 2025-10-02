@@ -40,10 +40,22 @@ class Contacto(BaseModel):
     nombre: str
     email: str
 
+@app.on_event("startup")
+async def startup_event():
+    await verificar_conexion()
 
 @app.get("/")
 def root():
     return {"mensaje": "API funcionando"}
+
+@app.get("/test-db")
+async def test_db():
+    try:
+        doc = {"nombre": "Test", "email": "test@mail.com"}
+        resultado = await coleccion.insert_one(doc)
+        return {"mensaje": "Inserción exitosa", "id": str(resultado.inserted_id)}
+    except Exception as e:
+        return {"mensaje": "Error al insertar en DB", "error": str(e)}
 
 @app.post("/procesar")
 def procesar(contacto: Contacto):
