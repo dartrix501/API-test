@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
-from motor.motor_asyncio import AsyncIOMotorClient
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
 import os
 
 
@@ -11,7 +12,7 @@ origins = ["https://testeos-chi.vercel.app"]
 
 
 MONGO_URI = os.environ.get("MONGO_URI")
-client = AsyncIOMotorClient(MONGO_URI)
+client = MongoClient(MONGO_URI, server_api=ServerApi('1'))
 db = client["Test"]
 coleccion = db["contactos"]
 
