@@ -12,8 +12,18 @@ origins = ["https://testeos-chi.vercel.app"]
 
 MONGO_URI = os.environ.get("MONGO_URI")
 client = AsyncIOMotorClient(MONGO_URI)
-db = client["mi_app"]
+db = client["Test"]
 coleccion = db["contactos"]
+
+
+
+async def verificar_conexion():
+    try:
+        await client.admin.command('ping')
+        print("✅ Conectado a MongoDB Atlas correctamente")
+    except Exception as e:
+        print("❌ Error al conectar a MongoDB Atlas:", e)
+
 
 
 # Permitir peticiones desde cualquier origen (Vercel incluido)
