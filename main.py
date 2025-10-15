@@ -64,6 +64,6 @@ def procesar(contacto: Contacto):
 @app.get("/contactos")
 def obtener_contactos():
     contactos = list(coleccion.find({}, {"_id": 0}))  # lista de documentos sin _id
-    return contactos
+    return contactos 
 
-print("Hello word")
+print("Hello!")
