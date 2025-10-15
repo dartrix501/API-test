@@ -56,11 +56,11 @@ def test_db():
 
 @app.post("/procesar")
 def procesar(contacto: Contacto):
-    mensaje = {"mensaje": f"Datos recibidos correctamente: {contacto.nombre}, {contacto.email}"}
+    mensaje = {"mensaje": f"Datos recibidos correctamente: {contacto.nombre}, {contacto.email}, {contacto.numero}"}
     print(mensaje)
     
     # Guardar en la DB
-    coleccion.insert_one({"nombre": contacto.nombre, "email": contacto.email})
+    coleccion.insert_one({"nombre": contacto.nombre, "email": contacto.email, "numero": contacto.numero})
     return mensaje
 
 @app.get("/contactos")
