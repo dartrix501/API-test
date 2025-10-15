@@ -7,7 +7,7 @@ import os
 
 app = FastAPI()
 
-origins = ["https://testeos-chi.vercel.app"]
+origins = ["https://www.ipaess.com/Contacto.html"]
 
 # Conexión a MongoDB Atlas
 MONGO_URI = os.environ.get("MONGO_URI")
@@ -35,6 +35,7 @@ app.add_middleware(
 class Contacto(BaseModel):
     nombre: str
     email: str
+    numero: str
 
 @app.on_event("startup")
 def startup_event():
@@ -47,7 +48,7 @@ def root():
 @app.get("/test-db")
 def test_db():
     try:
-        doc = {"nombre": "Test", "email": "test@mail.com"}
+        doc = {"nombre": "Test", "email": "test@mail.com", "numero": "1234567890"}
         resultado = coleccion.insert_one(doc)
         return {"mensaje": "Inserción exitosa", "id": str(resultado.inserted_id)}
     except Exception as e:
@@ -57,6 +58,7 @@ def test_db():
 def procesar(contacto: Contacto):
     mensaje = {"mensaje": f"Datos recibidos correctamente: {contacto.nombre}, {contacto.email}"}
     print(mensaje)
+    
     # Guardar en la DB
     coleccion.insert_one({"nombre": contacto.nombre, "email": contacto.email})
     return mensaje
